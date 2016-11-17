@@ -46,10 +46,13 @@ class GgcOpenCommand(sublime_plugin.WindowCommand):
         # Fallback search on path
         return shutil.which(os.path.basename(s.get(cmd)[0])) if s.get(cmd) else None
 
-    def is_enabled(self, cmd):
+    def is_enabled(self, **args):
+        cmd = str(args.get('cmd', ''))
         return True if self.get_excecutable(cmd) else False
 
-    def run(self, cmd):
+    def run(self, **args):
+        cmd = str(args.get('cmd', ''))
+        beforePathOptions = str(args.get('beforePathOptions', ''))
         # Get repository location and git gui client
         excecutable = self.get_excecutable(cmd)
         repository = self.get_git_repository()
@@ -62,5 +65,9 @@ class GgcOpenCommand(sublime_plugin.WindowCommand):
             print("Git GUI Clients: File/project is not in a Git repo.")
             return
 
-        print("Git GUI Clients:", excecutable, repository)
-        subprocess.Popen(excecutable, cwd=repository, shell=True)
+        execArgs = excecutable
+        if beforePathOptions:
+            execArgs = execArgs + " " + beforePathOptions + " " + repository
+
+        print("Git GUI Clients:", execArgs, repository)
+        subprocess.Popen(execArgs, cwd=repository, shell=True)

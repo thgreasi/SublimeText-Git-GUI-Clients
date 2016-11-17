@@ -16,6 +16,10 @@
 		"command": "ggc_open", "args": {"cmd": "gitg"}
 	},
 	{ 
+		"caption": "Git GUI Clients: GitKraken",
+		"command": "ggc_open", "args": {"cmd": "gitkraken", "beforePathOptions": "-p"}
+	},
+	{ 
 		"caption": "Git GUI Clients: SourceTree", 
 		"command": "ggc_open", "args": {"cmd": "sourcetree"}
 	}

@@ -15,6 +15,9 @@
   "gitg": [
     "/usr/bin/gitg"
   ],
+  "gitkraken": [
+    "/usr/bin/gitkraken"
+  ],
   "sourcetree": [
     "/usr/local/bin/stree"
   ]
